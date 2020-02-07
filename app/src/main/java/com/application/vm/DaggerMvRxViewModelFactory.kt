@@ -4,8 +4,8 @@ import androidx.fragment.app.FragmentActivity
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
-import com.application.MvRxViewModel
 import com.application.appComponent
+import com.application.ui.base.MvRxViewModel
 
 abstract class DaggerMvRxViewModelFactory<VM : MvRxViewModel<S>, S : MvRxState>(
     private val viewModelClass: Class<out MvRxViewModel<S>>

@@ -1,7 +1,6 @@
 package com.application.di
 
-import androidx.lifecycle.ViewModel
-import com.application.MvRxViewModel
+import com.application.ui.base.MvRxViewModel
 import dagger.MapKey
 import kotlin.reflect.KClass
 

@@ -1,10 +1,10 @@
 package com.application.di
 
 import android.app.Application
-import com.application.MvRxViewModel
 import com.application.MyApplication
 import com.application.di.module.AppModule
 import com.application.di.module.NetworkModule
+import com.application.ui.base.MvRxViewModel
 import com.application.vm.AssistedViewModelFactory
 import dagger.BindsInstance
 import dagger.Component
