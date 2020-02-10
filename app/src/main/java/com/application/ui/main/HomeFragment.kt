@@ -1,11 +1,14 @@
 package com.application.ui.main
 
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.AutoModel
 import com.airbnb.mvrx.*
 import com.application.R
@@ -26,6 +29,8 @@ class HomeFragment : BaseMvRxFragment() {
     private lateinit var manager: CardStackLayoutManager
 
     private val swipeAdapter by lazy { SwipeDeckAdapter() }
+
+    private val stackAdapter by lazy { StackAdapter(requireContext()) }
 
 //    private val epoxyController by lazy {
 //        simpleController(viewModel) { state ->
@@ -52,16 +57,40 @@ class HomeFragment : BaseMvRxFragment() {
 //        setupCardStack()
 //        home_epoxy.setControllerAndBuildModels(epoxyController)
 
-        home_epoxy.withModels {
-            withState(viewModel) { state ->
-                state.suggestions()?.forEach { suggestion ->
-                    swipeableCardView {
-                        user(suggestion)
-                        id(suggestion.id)
-                    }
-                }
-            }
-        }
+//        home_epoxy.withModels {
+//            withState(viewModel) { state ->
+//                state.suggestions()?.forEach { suggestion ->
+//                    swipeableCardView {
+//                        user(suggestion)
+//                        id(suggestion.id)
+//                    }
+//                }
+//            }
+//        }
+
+//        home_epoxy.adapter = epoxyController.adapter
+
+//        class OverlapDecoration : RecyclerView.ItemDecoration() {
+//            private var vertOverlap = 0
+//
+//            override fun getItemOffsets(
+//                outRect: Rect,
+//                view: View,
+//                parent: RecyclerView,
+//                state: RecyclerView.State
+//            ) {
+//                vertOverlap = view.height
+//                val itemPosition = parent.getChildAdapterPosition(view)
+//                if (itemPosition == 0) return
+//                outRect.set(0, vertOverlap, 0, 0)
+//            }
+//
+//        }
+
+//        home_epoxy.addItemDecoration(OverlapDecoration())
+//        home_epoxy.layoutManager = LinearLayoutManager(requireContext())
+
+        home_stack.adapter = stackAdapter
 
     }
 
@@ -70,8 +99,9 @@ class HomeFragment : BaseMvRxFragment() {
             is Loading -> setUILoading(true)
             is Success -> {
                 setUILoading(false)
-                swipeAdapter.swapData(state.suggestions.invoke())
-                home_epoxy.requestModelBuild()
+//                epoxyController.requestModelBuild()
+                stackAdapter.listOfSuggestions = state.suggestions()?.toMutableList()!!
+                stackAdapter.notifyDataSetChanged()
             }
         }
     }

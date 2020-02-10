@@ -23,7 +23,7 @@ class MyRepository @Inject constructor(private val restApi: RestApi) {
         }
 
     suspend fun getUsers() = safeCall {
-        delay(3000)
+        delay(400)
         mockedUsers }
 
     private val violettaPhotos = listOf(
