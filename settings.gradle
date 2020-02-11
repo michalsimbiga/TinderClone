@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='TinderClone'
+rootProject.name='tinderclone'

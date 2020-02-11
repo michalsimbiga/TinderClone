@@ -6,7 +6,7 @@
     android:background="@android:color/darker_gray"
     android:layout_height="match_parent">
 
-    <com.yuyakaido.android.cardstackview.CardStackView
+    <com.airbnb.epoxy.EpoxyRecyclerView
         android:id="@+id/home_epoxy"
         android:layout_width="@dimen/zero_dp"
         android:layout_height="@dimen/zero_dp"

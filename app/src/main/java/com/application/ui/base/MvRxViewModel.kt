@@ -6,7 +6,6 @@ import com.application.domain.common.result.Result
 import com.application.domain.common.result.fold
 import com.application.domain.common.useCase.NoParametersUseCase
 import kotlinx.coroutines.SupervisorJob
-import javax.inject.Inject
 
 abstract class MvRxViewModel<S : MvRxState>(
     initialState: S
