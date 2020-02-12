@@ -5,16 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
+import androidx.recyclerview.widget.ItemTouchHelper
+import com.airbnb.epoxy.EpoxyTouchHelper
 import com.airbnb.mvrx.*
 import com.application.R
-import com.application.domain.common.extensions.simpleController
 import com.application.ui.models.SwipeableCardView
 import com.application.ui.models.SwipeableCardViewModel_
-import com.application.ui.models.swipeableCardView
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 import com.yuyakaido.android.cardstackview.StackFrom
 import com.yuyakaido.android.cardstackview.SwipeableMethod
 import kotlinx.android.synthetic.main.home_fragment.*
+import timber.log.Timber
 import javax.inject.Inject
 
 class HomeFragment : BaseMvRxFragment() {
@@ -22,27 +23,19 @@ class HomeFragment : BaseMvRxFragment() {
     @Inject
     lateinit var viewModelFactory: HomeViewModel.Factory
 
-    private val epoxyController by lazy {
-        simpleController(viewModel) { state ->
-            SwipeableModelGroup(mutableListOf<SwipeableCardViewModel_>().apply {
-                state.suggestions()?.forEach { suggestion ->
-                    add(
-                        SwipeableCardViewModel_()
-                            .user(suggestion)
-                            .id(suggestion.id)
-                    )
-                }
-            })
-        }
-    }
+    private val swipeController = SwipeContoller()
 
-
-//            state.suggestions()?.forEach { suggestion ->
-//                swipeableCardView {
-//                    user(suggestion)
-//                    id(suggestion.id)
+//    private val epoxyController by lazy {
+//        simpleController(viewModel) { state ->
+//            SwipeableModelGroup(mutableListOf<SwipeableCardViewModel_>().apply {
+//                state.suggestions()?.forEach { suggestion ->
+//                    add(
+//                        SwipeableCardViewModel_()
+//                            .user(suggestion)
+//                            .id(suggestion.id)
+//                    )
 //                }
-//            }
+//            })
 //        }
 //    }
 
@@ -57,8 +50,9 @@ class HomeFragment : BaseMvRxFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupEpoxy()
 //        home_epoxy.layoutManager = getCardStackLayoutManager()
-        home_epoxy.adapter = epoxyController.adapter
+//        home_epoxy.adapter = epoxyController.adapter
 
 //        home_epoxy.withModels {
 //            withState(viewModel) { state ->
@@ -75,10 +69,71 @@ class HomeFragment : BaseMvRxFragment() {
 //            }
 //        }
 //        home_epoxy.withModels {
+//            withState(viewModel) { state ->
 //
+//                SwipeableModelGroup(mutableListOf<SwipeableCardViewModel_>().apply {
+//                                        state.suggestions()?.forEach { suggestion ->
+//                        add(
+//                            SwipeableCardViewModel_()
+//                                .user(suggestion)
+//                                .id(suggestion.id)
+//                        )
+//                    }
+//                }).buildModels()
+//            }
+
 //            SwipeableCardView(requireContext())
-//                .setUser(withState(viewModel) {state -> state.suggestions.invoke()?.first()}!!)
+//                .setUser(withState(viewModel) { state ->
+//                    state.suggestions.invoke()?.first()
+//                }!!)
 //        }
+
+
+    }
+
+    private fun setupEpoxy() {
+
+        home_epoxy.adapter = swipeController.adapter
+
+        EpoxyTouchHelper.initSwiping(home_epoxy)
+            .withDirections(ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT or ItemTouchHelper.UP or ItemTouchHelper.DOWN)
+            .withTarget(ModelGroup::class.java)
+            .andCallbacks(object : EpoxyTouchHelper.SwipeCallbacks<ModelGroup>() {
+                override fun onSwipeCompleted(
+                    model: ModelGroup?,
+                    itemView: View?,
+                    position: Int,
+                    direction: Int
+                ) {
+                    Timber.i("TESTING swipeCompleted $model $itemView $position $direction")
+                }
+
+                override fun clearView(model: ModelGroup?, itemView: View?) {
+                    withState(viewModel) { state ->
+                        state.suggestions.invoke()?.let { swipeController.setSwipeCards(it)} }
+                }
+
+                override fun onSwipeReleased(model: ModelGroup?, itemView: View?) {
+                    
+                }
+
+            })
+
+
+//        EpoxyTouchHelper.initDragging(swipeController)
+//            .withRecyclerView(home_epoxy)
+//            .withTarget(ModelGroup::class.java)
+//            .andCallbacks( object : EpoxyTouchHelper.DragCallbacks<ModelGroup>(){
+//                override fun onModelMoved(
+//                    fromPosition: Int,
+//                    toPosition: Int,
+//                    modelBeingMoved: ModelGroup?,
+//                    itemView: View?
+//                ) {
+//                    Timber.i("TESTING swipeCompleted $fromPosition $toPosition $modelBeingMoved $itemView")
+//                }
+//            })
+
     }
 
     override fun invalidate() = withState(viewModel) { state ->
@@ -86,8 +141,7 @@ class HomeFragment : BaseMvRxFragment() {
             is Loading -> setUILoading(true)
             is Success -> {
                 setUILoading(false)
-//                home_epoxy.requestModelBuild()
-                epoxyController.requestModelBuild()
+                swipeController.setSwipeCards(state.suggestions.invoke())
             }
         }
     }
