@@ -4,12 +4,13 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.airbnb.epoxy.ModelProp
-import com.airbnb.epoxy.ModelView
+import androidx.recyclerview.widget.ItemTouchHelper
+import com.airbnb.epoxy.*
 import com.application.R
 import com.application.data.Suggestion
 import com.application.ui.main.PhotosViewPagerAdapter
 import kotlinx.android.synthetic.main.swipe_card_view.view.*
+import org.jetbrains.annotations.Nullable
 
 @ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_MATCH_HEIGHT)
 class SwipeableCardView @JvmOverloads constructor(

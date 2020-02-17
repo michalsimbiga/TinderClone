@@ -49,8 +49,6 @@ class MyApplication : DaggerApplication() {
     private fun setupTimber() {
         if (BuildConfig.DEBUG) {
             Timber.plant(DebugTree())
-        } else {
-            Timber.plant(ReleaseTree())
         }
     }
 
@@ -68,29 +66,6 @@ class MyApplication : DaggerApplication() {
                     .penaltyLog()
                     .build()
             )
-        }
-    }
-
-    private class ReleaseTree : Timber.Tree() {
-
-        override fun isLoggable(tag: String?, priority: Int): Boolean {
-            if (priority == Log.VERBOSE || priority == Log.DEBUG || priority == Log.INFO) {
-                return false
-            }
-            return true
-        }
-
-        //TODO: add support for logging framework
-        override fun log(priority: Int, tag: String?, message: String?, t: Throwable?) {
-            if (!isLoggable(tag, priority)) {
-                return
-            }
-
-            if (priority == Log.WARN) {
-                Log.w(tag, message)
-            } else if (priority == Log.ERROR) {
-                Log.e(tag, message)
-            }
         }
     }
 }

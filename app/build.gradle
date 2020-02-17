@@ -3,27 +3,21 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-configurations {
-    ktlint
-}
-
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    compileSdkVersion Versions.compileSDK
+    buildToolsVersion Versions.buildToolsVersion
     defaultConfig {
-        applicationId "com.tinderclone"
-        minSdkVersion 23
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        applicationId ApplicationID.id
+        minSdkVersion Versions.minSDK
+        targetSdkVersion Versions.targetSDK
+        versionCode Releases.versionCode
+        versionName Releases.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", 'BASE_URL', baseUrl
+//        buildConfigField "String", 'KEY_CLOACK', keyCloack
     }
     buildTypes {
-        debug {
-            buildConfigField "String", 'BASE_URL', baseUrl
-        }
         release {
-            buildConfigField "String", 'BASE_URL', baseUrl
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -48,102 +42,57 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation Libraries.kotlin
 
-    //Core
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.core:core-ktx:1.0.1'
-    implementation 'androidx.legacy:legacy-support-core-utils:1.0.0'
+    implementation Libraries.appCompat
+    implementation Libraries.coreKtx
 
-    // MvRx
-    implementation 'com.airbnb.android:mvrx:2.0.0-alpha2'
+    implementation Libraries.mvrx
 
-    // Epoxy
-    implementation 'com.airbnb.android:epoxy:3.7.0'
-    kapt 'com.airbnb.android:epoxy-processor:3.7.0'
+    implementation Libraries.epoxy
+    kapt Libraries.epoxyProcessor
 
-    //Dagger 2
-    implementation "com.google.dagger:dagger:2.21"
-    implementation "com.google.dagger:dagger-android:2.21"
-    implementation "com.google.dagger:dagger-android-support:2.21"
-    kapt "com.google.dagger:dagger-compiler:2.21"
-    kapt "com.google.dagger:dagger-android-processor:2.21"
+    implementation Libraries.dagger
+    implementation Libraries.daggerAndroid
+    implementation Libraries.daggerSupport
+    kapt Libraries.daggerCompiler
+    kapt Libraries.daggerProcessor
 
-    //Assisted Inject
-    compileOnly "com.squareup.inject:assisted-inject-annotations-dagger2:0.3.3"
-    kapt "com.squareup.inject:assisted-inject-processor-dagger2:0.3.3"
+    compileOnly Libraries.assistedInject
+    kapt Libraries.assistedInjectProcessor
 
-    //Lifecycle
-    implementation "androidx.lifecycle:lifecycle-runtime:2.2.0-alpha01"
-    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0-alpha01"
-    implementation "androidx.lifecycle:lifecycle-livedata:2.2.0-alpha01"
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-savedstate:1.0.0-rc01'
+    implementation Libraries.lifecycleRuntime
+    implementation Libraries.lifecycleExtensions
+    implementation Libraries.lifecycleLivedata
+    implementation Libraries.savedState
 
-    // - Adds viewModelScope
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha01"
-    // - Adds liveData
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-alpha01"
+    implementation Libraries.viewModelScope
+    implementation Libraries.liveDataKtx
 
-    //Retrofit2 for Coroutines
-    implementation "com.squareup.retrofit2:retrofit:2.6.0"
-    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
-    implementation "com.squareup.okhttp3:okhttp:3.12.0"
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.0'
+    implementation Libraries.retrofit
+    implementation Libraries.gson
+    implementation Libraries.okhttp
+    implementation Libraries.okhttpInterceptor
 
-    //UI
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation "androidx.recyclerview:recyclerview:1.0.0"
-    implementation "androidx.cardview:cardview:1.0.0"
-    implementation "androidx.constraintlayout:constraintlayout:1.1.3"
+    implementation Libraries.material
+    implementation Libraries.recyclerView
+    implementation Libraries.cardView
+    implementation Libraries.constraint
+
+    implementation Libraries.navigationFragmentKtx
+    implementation Libraries.navigationKtx
 
     //Navigation
     implementation "androidx.navigation:navigation-runtime-ktx:2.2.0-alpha01"
-    implementation "androidx.navigation:navigation-fragment-ktx:2.2.0-alpha01"
     implementation "androidx.navigation:navigation-ui-ktx:2.2.0-alpha01"
-    //implementation "androidx.navigation:navigation-safe-args-gradle-plugin:2.2.0-alpha01"
 
-    //Logging
-    implementation "com.jakewharton.timber:timber:4.5.1"
+    implementation Libraries.timber
 
-    //LeakCanary
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-alpha-1'
+    debugImplementation Libraries.leakCanary
 
-    //Testing
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.2.1"
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1'
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.1'
-    testImplementation "androidx.arch.core:core-testing:2.0.1"
-    testImplementation "com.squareup.okhttp3:mockwebserver:3.12.0"
+    implementation Libraries.glide
+    annotationProcessor Libraries.glideCompiler
 
-    kaptTest "com.google.dagger:dagger-compiler:2.21"
-    kaptTest "com.google.dagger:dagger-android-processor:2.21"
+    implementation Libraries.tinderSwipe
 
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.23.0'
-    testImplementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0"
-
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-
-    //  Glide
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
-
-    //  Tinder like swipe layout
-    implementation "com.yuyakaido.android:card-stack-view:2.3.4"
-
-    //KtLint
-    ktlint "com.github.shyiko:ktlint:0.29.0"
-    implementation "me.cassiano:ktlint-html-reporter:0.2.0"
 }
-
-task ktlint(type: JavaExec, group: "verification") {
-    description = "Check Kotlin code style."
-    main = "com.github.shyiko.ktlint.Main"
-    classpath = configurations.ktlint
-    args "src/**/*.kt"
-    args "--reporter=plain"
-    args "--reporter=html,artifact=me.cassiano:ktlint-html-reporter:0.2.0,output=build/reports/ktlint.html"
-}
-
-check.dependsOn(ktlint)

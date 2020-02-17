@@ -11,7 +11,7 @@ data class MyApiException(
 
     constructor(response: Response<*>) : this(
         response.code(),
-        response.raw().request().url().toString(),
+        response.raw().request.url.toString(),
         response.errorBody()?.string()
     )
 

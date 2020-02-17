@@ -95,44 +95,49 @@ class HomeFragment : BaseMvRxFragment() {
 
         home_epoxy.adapter = swipeController.adapter
 
-        EpoxyTouchHelper.initSwiping(home_epoxy)
-            .withDirections(ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT or ItemTouchHelper.UP or ItemTouchHelper.DOWN)
-            .withTarget(ModelGroup::class.java)
-            .andCallbacks(object : EpoxyTouchHelper.SwipeCallbacks<ModelGroup>() {
-                override fun onSwipeCompleted(
-                    model: ModelGroup?,
-                    itemView: View?,
-                    position: Int,
-                    direction: Int
-                ) {
-                    Timber.i("TESTING swipeCompleted $model $itemView $position $direction")
-                }
-
-                override fun clearView(model: ModelGroup?, itemView: View?) {
-                    withState(viewModel) { state ->
-                        state.suggestions.invoke()?.let { swipeController.setSwipeCards(it)} }
-                }
-
-                override fun onSwipeReleased(model: ModelGroup?, itemView: View?) {
-                    
-                }
-
-            })
-
-
-//        EpoxyTouchHelper.initDragging(swipeController)
-//            .withRecyclerView(home_epoxy)
-//            .withTarget(ModelGroup::class.java)
-//            .andCallbacks( object : EpoxyTouchHelper.DragCallbacks<ModelGroup>(){
-//                override fun onModelMoved(
-//                    fromPosition: Int,
-//                    toPosition: Int,
-//                    modelBeingMoved: ModelGroup?,
-//                    itemView: View?
+//        EpoxyTouchHelper.initSwiping(home_epoxy)
+//            .withDirections(ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT or ItemTouchHelper.UP or ItemTouchHelper.DOWN)
+//            .withTarget(SwipeableCardViewModel_::class.java)
+//            .andCallbacks(object : EpoxyTouchHelper.SwipeCallbacks<SwipeableCardViewModel_>() {
+//                override fun onSwipeCompleted(
+//                    model: SwipeableCardViewModel_?,
+//                    itemView: View?,
+//                    position: Int,
+//                    direction: Int
 //                ) {
-//                    Timber.i("TESTING swipeCompleted $fromPosition $toPosition $modelBeingMoved $itemView")
+//                    Timber.i("TESTING swipeCompleted $model $itemView $position $direction")
 //                }
+//
+//                override fun clearView(model: SwipeableCardViewModel_?, itemView: View?) {
+//                    withState(viewModel) { state ->
+//                        state.suggestions.invoke()?.let { swipeController.setSwipeCards(it)} }
+//                }
+//
+//                override fun onSwipeReleased(model: SwipeableCardViewModel_?, itemView: View?) {
+//
+//                }
+//
+//                override fun isSwipeEnabledForModel(model: SwipeableCardViewModel_?) = true
+//
 //            })
+//            .attachToRecyclerView(home_epoxy)
+
+
+
+        EpoxyTouchHelper.initDragging(swipeController)
+            .withRecyclerView(home_epoxy)
+            .forGrid()
+            .withTarget(ModelGroup::class.java)
+            .andCallbacks( object : EpoxyTouchHelper.DragCallbacks<ModelGroup>(){
+                override fun onModelMoved(
+                    fromPosition: Int,
+                    toPosition: Int,
+                    modelBeingMoved: ModelGroup?,
+                    itemView: View?
+                ) {
+                    Timber.i("TESTING swipeCompleted $fromPosition $toPosition $modelBeingMoved $itemView")
+                }
+            })
 
     }
 
