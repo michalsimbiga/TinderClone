@@ -1,2 +1,10 @@
-include ':app'
-rootProject.name='tinderclone'
+
+include Modules.app
+include Modules.commonData
+include Modules.commonUi
+include Modules.commonDomain
+include Modules.commonRemote
+
+include SwipeModules.swipeUi,
+        SwipeModules.swipeDomain,
+        SwipeModules.swipeData

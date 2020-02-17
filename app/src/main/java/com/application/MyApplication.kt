@@ -1,35 +1,24 @@
 package com.application
 
+import android.app.Application
 import android.os.StrictMode
-import android.util.Log
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentActivity
 import com.airbnb.mvrx.MvRx
 import com.airbnb.mvrx.MvRxViewModelConfigFactory
-import com.application.di.AppComponent
-import com.application.di.DaggerAppComponent
-import dagger.android.DaggerApplication
+import com.application.di.mainModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
-fun FragmentActivity.appComponent(): AppComponent {
-    return (application as MyApplication).applicationInjector
-}
+class MyApplication : Application() {
 
-class MyApplication : DaggerApplication() {
-
-    val applicationInjector = DaggerAppComponent
-        .builder()
-        .application(this)
-        .build()
-
-    public override fun applicationInjector() = applicationInjector
 
     override fun onCreate() {
         super.onCreate()
 
         setupStrictMode()
-        setupDagger()
+        setupKoin()
         setupTimber()
         setupMvRx()
     }
@@ -38,12 +27,10 @@ class MyApplication : DaggerApplication() {
         MvRx.viewModelConfigFactory = MvRxViewModelConfigFactory(applicationContext)
     }
 
-    private fun setupDagger() {
-        DataBindingUtil.setDefaultComponent(
-            applicationInjector
-                .bindingComponentBuilder()
-                .build()
-        )
+    private fun setupKoin() = startKoin {
+        androidContext(this@MyApplication)
+        androidLogger()
+        modules(mainModule)
     }
 
     private fun setupTimber() {

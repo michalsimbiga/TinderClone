@@ -1,0 +1,28 @@
+apply plugin: 'com.android.application'
+apply from :"$rootDir/common-android.gradle"
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+kapt {
+    correctErrorTypes = true
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(Modules.commonDomain)
+    implementation project(Modules.commonUi)
+    implementation project(Modules.commonData)
+    implementation project(Modules.commonRemote)
+
+    implementation project(SwipeModules.swipeDomain)
+    implementation project(SwipeModules.swipeData)
+
+    implementation Libraries.epoxy
+    kapt Libraries.epoxyProcessor
+
+    implementation Libraries.koinAndroid
+
+    implementation Libraries.retrofit
+}

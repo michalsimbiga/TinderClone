@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/home_fragment"
-        android:name="com.application.ui.main.HomeFragment"
+        android:name="com.application.swipeSuggestions_ui.main.HomeFragment"
         android:label="Home Fragment" />
 
 </navigation>

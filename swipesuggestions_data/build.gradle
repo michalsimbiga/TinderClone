@@ -1,0 +1,11 @@
+apply from: "$rootDir/common-kotlin.gradle"
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(Modules.commonDomain)
+    implementation project(Modules.commonData)
+
+    implementation project(SwipeModules.swipeDomain)
+    implementation Libraries.retrofit
+}

@@ -2,19 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply from: "$rootDir/common-android.gradle"
 
 android {
-    compileSdkVersion Versions.compileSDK
     buildToolsVersion Versions.buildToolsVersion
+
     defaultConfig {
         applicationId ApplicationID.id
-        minSdkVersion Versions.minSDK
-        targetSdkVersion Versions.targetSDK
-        versionCode Releases.versionCode
-        versionName Releases.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", 'BASE_URL', baseUrl
-//        buildConfigField "String", 'KEY_CLOACK', keyCloack
     }
     buildTypes {
         release {
@@ -42,6 +37,14 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(Modules.commonDomain)
+    implementation project(Modules.commonRemote)
+    implementation project(Modules.commonUi)
+    implementation project(Modules.commonData)
+
+    implementation project(SwipeModules.swipeUi)
+
     implementation Libraries.kotlin
 
     implementation Libraries.appCompat
@@ -51,15 +54,6 @@ dependencies {
 
     implementation Libraries.epoxy
     kapt Libraries.epoxyProcessor
-
-    implementation Libraries.dagger
-    implementation Libraries.daggerAndroid
-    implementation Libraries.daggerSupport
-    kapt Libraries.daggerCompiler
-    kapt Libraries.daggerProcessor
-
-    compileOnly Libraries.assistedInject
-    kapt Libraries.assistedInjectProcessor
 
     implementation Libraries.lifecycleRuntime
     implementation Libraries.lifecycleExtensions
@@ -94,5 +88,12 @@ dependencies {
     annotationProcessor Libraries.glideCompiler
 
     implementation Libraries.tinderSwipe
+
+    implementation Libraries.koin
+    implementation Libraries.koinExt
+    implementation Libraries.koinAndroid
+    implementation Libraries.koinAndroidxScope
+    implementation Libraries.koinAndroidxViewModel
+    implementation Libraries.koinAndroidxExt
 
 }

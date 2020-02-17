@@ -28,7 +28,11 @@ object Versions {
 
     val epoxy = "3.7.0"
 
+    val koin = "2.1.0-beta-1"
+
     val gson = "2.6.0"
+
+    val kotlinCoroutines = "1.3.2"
 
     val junit = "4.12"
     val ext_junit = "1.1.1"
@@ -43,8 +47,6 @@ object Versions {
 
     val ktlint = "0.29.0"
     val mvrx = "2.0.0-alpha2"
-    val dagger = "2.21"
-    val assistedInject = "0.3.3"
     val glide = "4.11.0"
     val cardView = "1.0.0"
     val recyclerView = "1.0.0"
@@ -65,21 +67,13 @@ object Libraries {
     val epoxy = "com.airbnb.android:epoxy:${Versions.epoxy}"
     val epoxyProcessor = "com.airbnb.android:epoxy-processor:${Versions.epoxy}"
 
-    val dagger = "com.google.dagger:dagger:${Versions.dagger}"
-    val daggerAndroid = "com.google.dagger:dagger-android:${Versions.dagger}"
-    val daggerSupport = "com.google.dagger:dagger-android-support:${Versions.dagger}"
-    val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
-    val daggerProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
-
-    val assistedInject =
-        "com.squareup.inject:assisted-inject-annotations-dagger2:${Versions.assistedInject}"
-    val assistedInjectProcessor =
-        "com.squareup.inject:assisted-inject-processor-dagger2:${Versions.assistedInject}"
-
     val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime:${Versions.lifecycle}"
-    val lifecycleExtensions =  "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
+    val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
     val lifecycleLivedata = "androidx.lifecycle:lifecycle-livedata:${Versions.lifecycle}"
     val savedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.savedState}"
+
+    val kotlinCoroutines =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}"
 
     val viewModelScope = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
     val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
@@ -112,4 +106,26 @@ object Libraries {
     val tinderSwipe = "com.yuyakaido.android:card-stack-view:2.3.4"
 
     val ktlint = "com.github.shyiko:ktlint:${Versions.ktlint}"
+
+    val koin = "org.koin:koin-core:${Versions.koin}"
+    val koinExt = "org.koin:koin-core-ext:${Versions.koin}"
+    val koinAndroidxExt = "org.koin:koin-androidx-ext:${Versions.koin}"
+    val koinAndroid = "org.koin:koin-android:${Versions.koin}"
+    val koinAndroidxScope = "org.koin:koin-androidx-scope:${Versions.koin}"
+    val koinAndroidxViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
+}
+
+object Modules {
+    val app = ":app"
+
+    val commonDomain = ":common_domain"
+    val commonData = ":common_data"
+    val commonUi = ":common_ui"
+    val commonRemote = ":common_remote"
+}
+
+object SwipeModules {
+    val swipeUi = ":swipesuggestions_ui"
+    val swipeDomain = ":swipesuggestions_domain"
+    val swipeData = ":swipesuggestions_data"
 }

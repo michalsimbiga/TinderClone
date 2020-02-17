@@ -1,0 +1,12 @@
+apply from: "$rootDir/common-kotlin.gradle"
+
+dependencies {
+    implementation project(Modules.commonDomain)
+
+    implementation Libraries.koin
+
+    implementation Libraries.retrofit
+    implementation Libraries.okhttpInterceptor
+    implementation Libraries.okhttp
+    implementation Libraries.gson
+}
