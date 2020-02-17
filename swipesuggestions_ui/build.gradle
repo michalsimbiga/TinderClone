@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply from :"$rootDir/common-android.gradle"
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
@@ -13,16 +13,24 @@ dependencies {
 
     implementation project(Modules.commonDomain)
     implementation project(Modules.commonUi)
-    implementation project(Modules.commonData)
     implementation project(Modules.commonRemote)
 
     implementation project(SwipeModules.swipeDomain)
     implementation project(SwipeModules.swipeData)
 
-    implementation Libraries.epoxy
-    kapt Libraries.epoxyProcessor
-
+    //di
     implementation Libraries.koinAndroid
 
+    implementation Libraries.kotlinCoroutines
+
+    //remote
     implementation Libraries.retrofit
+
+    //ui
+    implementation Libraries.epoxy
+    kapt Libraries.epoxyProcessor
+    implementation Libraries.navigationFragment
+    implementation Libraries.navigationUi
+    implementation Libraries.appCompat
+    implementation Libraries.constraint
 }

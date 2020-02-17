@@ -1,20 +1,19 @@
 package com.example.swipesuggestion_data.repository
 
-import com.example.common_data.entity.PhotoFile
-import com.example.common_data.entity.Suggestion
 import com.example.common_domain.result.Result
 import com.example.common_domain.result.safeCall
 import com.example.swipesuggestion_data.dataSource.SuggestionsRemoteDataSource
+import com.example.swipesuggestions_domain.entity.PhotoFile
+import com.example.swipesuggestions_domain.entity.Suggestion
 import com.example.swipesuggestions_domain.repository.SuggestionsRepository
-import kotlinx.coroutines.delay
+
 
 class SuggestionsRepositoryImpl(private val suggestionsRemoteDataSource: SuggestionsRemoteDataSource):
     SuggestionsRepository {
 
     override suspend fun getSuggestions(): Result<List<Suggestion>> = safeCall {
-        delay(400)
         mockedUsers }
-    }
+
 
     private val violettaPhotos = listOf(
         PhotoFile(

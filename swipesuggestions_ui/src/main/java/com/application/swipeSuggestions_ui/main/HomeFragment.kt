@@ -4,22 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.LinearInterpolator
 import com.airbnb.epoxy.EpoxyTouchHelper
 import com.airbnb.mvrx.*
-import com.application.R
-import com.application.swipeSuggestions_ui.models.SwipeableCardViewModel_
-import com.yuyakaido.android.cardstackview.CardStackLayoutManager
-import com.yuyakaido.android.cardstackview.StackFrom
-import com.yuyakaido.android.cardstackview.SwipeableMethod
+import com.application.swipeSuggestions_ui.di.SwipeSuggestionsModules
+import com.example.swipesuggestions_ui.R
 import kotlinx.android.synthetic.main.home_fragment.*
-import timber.log.Timber
-import javax.inject.Inject
 
 class HomeFragment : BaseMvRxFragment() {
 
-    @Inject
-    lateinit var viewModelFactory: HomeViewModel.Factory
+    private val viewModel: HomeViewModel by fragmentViewModel()
 
     private val swipeController = SwipeContoller()
 
@@ -37,7 +30,11 @@ class HomeFragment : BaseMvRxFragment() {
 //        }
 //    }
 
-    private val viewModel: HomeViewModel by fragmentViewModel()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        SwipeSuggestionsModules.load()
+
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -133,7 +130,7 @@ class HomeFragment : BaseMvRxFragment() {
                     modelBeingMoved: ModelGroup?,
                     itemView: View?
                 ) {
-                    Timber.i("TESTING swipeCompleted $fromPosition $toPosition $modelBeingMoved $itemView")
+//                    Timber.i("TESTING swipeCompleted $fromPosition $toPosition $modelBeingMoved $itemView")
                 }
             })
 
@@ -154,19 +151,19 @@ class HomeFragment : BaseMvRxFragment() {
         swipe_card_loading_bar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
-    private fun getCardStackLayoutManager(): CardStackLayoutManager {
-        return CardStackLayoutManager(requireContext()).apply {
-            setStackFrom(StackFrom.None)
-            setVisibleCount(3)
-            setTranslationInterval(8.0f)
-            setScaleInterval(0.95f)
-            setSwipeThreshold(0.3f)
-            setMaxDegree(50.0f)
-            setCanScrollHorizontal(true)
-            setCanScrollVertical(true)
-            setSwipeableMethod(SwipeableMethod.AutomaticAndManual)
-            setOverlayInterpolator(LinearInterpolator())
-        }
-    }
+//    private fun getCardStackLayoutManager(): CardStackLayoutManager {
+//        return CardStackLayoutManager(requireContext()).apply {
+//            setStackFrom(StackFrom.None)
+//            setVisibleCount(3)
+//            setTranslationInterval(8.0f)
+//            setScaleInterval(0.95f)
+//            setSwipeThreshold(0.3f)
+//            setMaxDegree(50.0f)
+//            setCanScrollHorizontal(true)
+//            setCanScrollVertical(true)
+//            setSwipeableMethod(SwipeableMethod.AutomaticAndManual)
+//            setOverlayInterpolator(LinearInterpolator())
+//        }
+//    }
 }
 

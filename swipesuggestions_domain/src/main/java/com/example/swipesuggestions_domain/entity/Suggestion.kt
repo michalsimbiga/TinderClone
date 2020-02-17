@@ -1,4 +1,4 @@
-package com.example.common_data.entity
+package com.example.swipesuggestions_domain.entity
 
 data class Suggestion(
     val id: Int,

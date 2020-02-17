@@ -5,15 +5,19 @@ apply plugin: 'kotlin-kapt'
 apply from: "$rootDir/common-android.gradle"
 
 android {
-    buildToolsVersion Versions.buildToolsVersion
+    compileSdkVersion Versions.compileSDK
 
     defaultConfig {
         applicationId ApplicationID.id
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
+        debug {
+            debuggable true
             minifyEnabled false
+        }
+
+        release {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -73,8 +77,8 @@ dependencies {
     implementation Libraries.cardView
     implementation Libraries.constraint
 
-    implementation Libraries.navigationFragmentKtx
-    implementation Libraries.navigationKtx
+    implementation Libraries.navigationFragment
+    implementation Libraries.navigationUi
 
     //Navigation
     implementation "androidx.navigation:navigation-runtime-ktx:2.2.0-alpha01"
@@ -85,7 +89,7 @@ dependencies {
     debugImplementation Libraries.leakCanary
 
     implementation Libraries.glide
-    annotationProcessor Libraries.glideCompiler
+    kapt Libraries.glideCompiler
 
     implementation Libraries.tinderSwipe
 

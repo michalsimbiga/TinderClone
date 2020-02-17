@@ -4,10 +4,11 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.airbnb.epoxy.*
-import com.application.R
-import com.application.common_data.Suggestion
+import com.airbnb.epoxy.ModelProp
+import com.airbnb.epoxy.ModelView
 import com.application.swipeSuggestions_ui.main.PhotosViewPagerAdapter
+import com.example.swipesuggestions_domain.entity.Suggestion
+import com.example.swipesuggestions_ui.R
 import kotlinx.android.synthetic.main.swipe_card_view.view.*
 
 @ModelView(autoLayout = ModelView.Size.MATCH_WIDTH_MATCH_HEIGHT)

@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/application_navigation"
-    app:startDestination="@id/home_fragment">
+    android:id="@+id/application_navigation">
 
-    <fragment
-        android:id="@+id/home_fragment"
-        android:name="com.application.swipeSuggestions_ui.main.HomeFragment"
-        android:label="Home Fragment" />
+    <include app:graph="@navigation/nav_swipe" />
 
 </navigation>

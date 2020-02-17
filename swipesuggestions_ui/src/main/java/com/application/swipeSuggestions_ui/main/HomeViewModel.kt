@@ -1,46 +1,39 @@
 package com.application.swipeSuggestions_ui.main
 
-import com.airbnb.mvrx.Async
-import com.airbnb.mvrx.MvRxState
-import com.airbnb.mvrx.Uninitialized
-import com.application.common_data.Suggestion
-import com.application.swipeSuggestions_domain.useCases.GetJokesUseCase
-import com.application.swipeSuggestions_domain.useCases.GetSuggestionList
-import com.example.common_ui.MvRxViewModel
-import com.example.common_domain.AssistedViewModelFactory
-import com.example.common_domain.DaggerMvRxViewModelFactory
-import com.squareup.inject.assisted.Assisted
-import com.squareup.inject.assisted.AssistedInject
+import com.airbnb.mvrx.*
+import com.example.swipesuggestions_domain.GetSuggestionListUseCase
+import com.example.swipesuggestions_domain.entity.Suggestion
+import org.koin.android.ext.android.inject
 
-data class HomeState(val suggestions: Async<List<Suggestion>> = Uninitialized) : MvRxState
+data class HomeViewState(val suggestions: Async<List<Suggestion>> = Uninitialized) : MvRxState
 
-class HomeViewModel @AssistedInject constructor(
-    @Assisted state: HomeState,
-    private val getJokesUseCase: GetJokesUseCase,
-    private val getSuggestionList: GetSuggestionList
-) : com.example.common_ui.MvRxViewModel<HomeState>(state) {
+class HomeViewModel (
+    viewState: HomeViewState,
+    private val getSuggestionListUseCase: GetSuggestionListUseCase
+) : com.example.common_ui.MvRxViewModel<HomeViewState>(viewState) {
 
-    @AssistedInject.Factory
-    interface Factory :
-        AssistedViewModelFactory<HomeViewModel, HomeState> {
-        override fun create(state: HomeState): HomeViewModel
-    }
 
     init {
         fetchUsers()
     }
 
-//    fun fetchJokes() =
-//        getJokesUseCase.execute(
-//            mapper = { it.value },
-//            stateReducer = { copy(jokes = it) }
-//        )
-
-    fun fetchUsers() = getSuggestionList.execute(
+    fun fetchUsers() = getSuggestionListUseCase.execute(
         mapper = {it},
         stateReducer = { copy(suggestions = it)}
     )
 
-    companion object :
-        DaggerMvRxViewModelFactory<HomeViewModel, HomeState>(HomeViewModel::class.java)
+    companion object : MvRxViewModelFactory<HomeViewModel, HomeViewState> {
+        override fun create(
+            viewModelContext: ViewModelContext,
+            state: HomeViewState
+        ): HomeViewModel {
+
+            val getSuggestionListUseCase: GetSuggestionListUseCase by viewModelContext.activity.inject()
+
+            return HomeViewModel(
+                state,
+                getSuggestionListUseCase
+            )
+        }
+    }
 }

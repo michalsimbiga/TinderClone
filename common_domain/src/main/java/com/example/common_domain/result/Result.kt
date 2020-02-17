@@ -29,6 +29,8 @@ inline infix fun <T> Result<T>.doOnFailure(f: (MyError) -> Unit): Result<T> {
     return this
 }
 
+
+@Suppress("UNCHECKED_CAST")
 inline fun <T, A> Result<T>.fold(
     error: (MyError) -> A = { this as A },
     success: (T) -> A = { this as A }

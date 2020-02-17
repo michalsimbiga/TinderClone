@@ -1,6 +1,6 @@
 package com.example.swipesuggestion_data.api
 
-import com.example.common_data.entity.Suggestion
+import com.example.swipesuggestion_data.entity.Suggestion
 import retrofit2.Response
 import retrofit2.http.GET
 

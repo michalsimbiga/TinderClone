@@ -9,8 +9,21 @@ dependencies {
     implementation project(Modules.commonDomain)
     implementation project(Modules.commonData)
 
-    implementation Libraries.mvrx
+    implementation Libraries.coreKtx
+    implementation Libraries.lifecycleRuntime
 
-    implementation Libraries.epoxy
+    implementation Libraries.constraint
+    implementation Libraries.appCompat
+    implementation Libraries.viewPager2
+    implementation Libraries.material
+
+    implementation Libraries.navigationFragment
+    implementation Libraries.navigationUi
+
+    implementation Libraries.kotlinCoroutines
+
+    api Libraries.mvrx
+    api Libraries.epoxy
+
     kapt Libraries.epoxyProcessor
 }

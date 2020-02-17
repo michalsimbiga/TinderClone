@@ -1,10 +1,5 @@
-
 include Modules.app
-include Modules.commonData
-include Modules.commonUi
-include Modules.commonDomain
-include Modules.commonRemote
 
-include SwipeModules.swipeUi,
-        SwipeModules.swipeDomain,
-        SwipeModules.swipeData
+include Modules.commonData, Modules.commonUi, Modules.commonDomain, Modules.commonRemote
+
+include SwipeModules.swipeUi, SwipeModules.swipeDomain, SwipeModules.swipeData

@@ -1,7 +1,8 @@
 package com.application.swipeSuggestions_ui.main
 
 import com.airbnb.epoxy.EpoxyController
-import com.example.common_data.entity.Suggestion
+import com.application.swipeSuggestions_ui.models.SwipeableCardViewModel_
+import com.example.swipesuggestions_domain.entity.Suggestion
 import java.util.*
 
 class SwipeContoller : EpoxyController() {
@@ -17,7 +18,7 @@ class SwipeContoller : EpoxyController() {
             swipeCardModels.add(
                 SwipeableCardViewModel_()
                     .id(card.id)
-                    .user(card)
+//                    .user(card)
 //                    .onTouchListener(this)
             )
         }

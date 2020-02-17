@@ -25,7 +25,7 @@ object Versions {
     val material = "1.1.0"
     val core_ktx = "1.2.0"
     val constraint = "1.1.3"
-
+    val viewPager2 = "1.0.0-rc01"
     val epoxy = "3.7.0"
 
     val koin = "2.1.0-beta-1"
@@ -83,13 +83,15 @@ object Libraries {
     val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
     val okhttpInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
 
+    val viewPager2 = "androidx.viewpager2:viewpager2:${Versions.viewPager2}"
+
     val material = "com.google.android.material:material:${Versions.material}"
     val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
     val cardView = "androidx.cardview:cardview:${Versions.cardView}"
     val constraint = "androidx.constraintlayout:constraintlayout:${Versions.constraint}"
 
-    val navigationFragmentKtx = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
-    val navigationKtx = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
+    val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
+    val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
 
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 
