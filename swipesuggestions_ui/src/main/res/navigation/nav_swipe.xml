@@ -13,7 +13,7 @@
         tools:layout="@layout/home_fragment">
 
         <deepLink
-            android:id="@+id/deepLink"
+            android:id="@+id/swipeDeeplink"
             app:uri="tinderclone://swipe" />
 
     </fragment>

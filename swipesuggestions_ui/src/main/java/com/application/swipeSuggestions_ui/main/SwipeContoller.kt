@@ -25,6 +25,6 @@ class SwipeContoler : EpoxyController() {
     }
 
     override fun buildModels() {
-        for (item in swipeCardModels) add(ModelGroup(listOf(item)))
+        add(ModelGroup(swipeCardModels))
     }
 }

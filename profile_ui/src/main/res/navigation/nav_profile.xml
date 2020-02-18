@@ -13,7 +13,7 @@
         tools:layout="@layout/profile_fragment">
 
         <deepLink
-            android:id="@+id/deepLink2"
+            android:id="@+id/profileDeeplink"
             app:uri="tinderclone://profile" />
 
     </fragment>

@@ -22,16 +22,12 @@ class HomeFragment : BaseMvRxFragment() {
 
     private val viewModel: HomeViewModel by fragmentViewModel()
 
-    private val swipeControler = SwipeContoler()
-
     private val epoxyController by lazy {
         simpleController(viewModel) { state ->
-            state.suggestions()?.let { suggestions ->
-                suggestions.forEach { suggestion ->
-                    swipeableCardView {
-                        id(suggestion.id)
-                        user(suggestion)
-                    }
+            state.suggestions()?.forEach { suggestion ->
+                swipeableCardView {
+                    id(suggestion.id)
+                    user(suggestion)
                 }
             }
         }
@@ -57,7 +53,6 @@ class HomeFragment : BaseMvRxFragment() {
 
     private fun setupEpoxy() =
         with(home_epoxy) {
-            adapter = swipeControler.adapter
             layoutManager = getCardStackLayoutManager()
             adapter = epoxyController.adapter
         }
@@ -89,6 +84,11 @@ class HomeFragment : BaseMvRxFragment() {
             setSwipeableMethod(SwipeableMethod.AutomaticAndManual)
             setOverlayInterpolator(LinearInterpolator())
         }
+    }
+
+    override fun onDetach() {
+        home_epoxy.layoutManager = null
+        super.onDetach()
     }
 }
 
