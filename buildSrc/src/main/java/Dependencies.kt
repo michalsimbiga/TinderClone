@@ -1,4 +1,4 @@
-@file:Suppress("MayBeconstant")
+@file:Suppress("MayBeConstant")
 
 object ApplicationID {
     val id = "com.example.tinderclone"

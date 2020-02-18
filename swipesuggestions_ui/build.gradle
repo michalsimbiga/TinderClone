@@ -23,6 +23,8 @@ dependencies {
 
     implementation Libraries.kotlinCoroutines
 
+    implementation Libraries.glide
+
     //remote
     implementation Libraries.retrofit
 

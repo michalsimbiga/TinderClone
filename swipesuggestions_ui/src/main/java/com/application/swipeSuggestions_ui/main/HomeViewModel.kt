@@ -1,6 +1,7 @@
 package com.application.swipeSuggestions_ui.main
 
 import com.airbnb.mvrx.*
+import com.example.common_ui.MvRxViewModel
 import com.example.swipesuggestions_domain.GetSuggestionListUseCase
 import com.example.swipesuggestions_domain.entity.Suggestion
 import org.koin.android.ext.android.inject
@@ -10,8 +11,7 @@ data class HomeViewState(val suggestions: Async<List<Suggestion>> = Uninitialize
 class HomeViewModel (
     viewState: HomeViewState,
     private val getSuggestionListUseCase: GetSuggestionListUseCase
-) : com.example.common_ui.MvRxViewModel<HomeViewState>(viewState) {
-
+) : MvRxViewModel<HomeViewState>(viewState) {
 
     init {
         fetchUsers()
@@ -27,13 +27,8 @@ class HomeViewModel (
             viewModelContext: ViewModelContext,
             state: HomeViewState
         ): HomeViewModel {
-
             val getSuggestionListUseCase: GetSuggestionListUseCase by viewModelContext.activity.inject()
-
-            return HomeViewModel(
-                state,
-                getSuggestionListUseCase
-            )
+            return HomeViewModel(state,getSuggestionListUseCase)
         }
     }
 }

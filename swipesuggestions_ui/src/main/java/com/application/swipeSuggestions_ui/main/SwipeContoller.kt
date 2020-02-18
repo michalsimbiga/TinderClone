@@ -18,7 +18,7 @@ class SwipeContoller : EpoxyController() {
             swipeCardModels.add(
                 SwipeableCardViewModel_()
                     .id(card.id)
-//                    .user(card)
+                    .user(card)
 //                    .onTouchListener(this)
             )
         }

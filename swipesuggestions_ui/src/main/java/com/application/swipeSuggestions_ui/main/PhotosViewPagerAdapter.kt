@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
+import com.bumptech.glide.Glide
 import com.example.swipesuggestions_ui.R
 import kotlinx.android.synthetic.main.suggestion_photo_layout.view.*
 
@@ -28,12 +29,12 @@ class PhotosViewPagerAdapter(private val listOfPhotos: List<String>) :
     }
 
     private fun loadImage(container: ViewGroup, url: String, imageView: ImageView) {
-//        Glide()
-//            .with(container)
-//            .load(url)
-//            .optionalCenterCrop()
-//            .placeholder(R.drawable.ic_launcher_background)
-//            .into(imageView)
+        Glide
+            .with(container)
+            .load(url)
+            .optionalCenterCrop()
+            .placeholder(R.drawable.ic_launcher_background)
+            .into(imageView)
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, obj: Any) =

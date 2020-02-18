@@ -95,7 +95,6 @@ dependencies {
 
     implementation Libraries.koin
     implementation Libraries.koinExt
-    implementation Libraries.koinAndroid
     implementation Libraries.koinAndroidxScope
     implementation Libraries.koinAndroidxViewModel
     implementation Libraries.koinAndroidxExt
