@@ -28,6 +28,10 @@ dependencies {
     //remote
     implementation Libraries.retrofit
 
+    implementation Libraries.timber
+
+    implementation Libraries.tinderSwipe
+
     //ui
     implementation Libraries.epoxy
     kapt Libraries.epoxyProcessor

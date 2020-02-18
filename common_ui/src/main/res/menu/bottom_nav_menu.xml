@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/nav_menu_profile_icon"
+        android:title="Profile" />
+
+    <item
+        android:id="@+id/swipe"
+        android:icon="@drawable/nav_menu_swipe_icon"
+        android:title="Swipe" />
+
+    <item
+        android:id="@+id/messages"
+        android:icon="@drawable/nav_menu_messages_icon"
+        android:title="Messages" />
+
+</menu>

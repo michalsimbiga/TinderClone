@@ -4,5 +4,6 @@
     android:id="@+id/application_navigation">
 
     <include app:graph="@navigation/nav_swipe" />
+    <include app:graph="@navigation/nav_profile" />
 
 </navigation>

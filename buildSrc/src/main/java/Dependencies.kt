@@ -131,3 +131,7 @@ object SwipeModules {
     val swipeDomain = ":swipesuggestions_domain"
     val swipeData = ":swipesuggestions_data"
 }
+
+object ProfileModules {
+    val profileUi = ":profile_ui"
+}

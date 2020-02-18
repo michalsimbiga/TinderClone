@@ -49,6 +49,8 @@ dependencies {
 
     implementation project(SwipeModules.swipeUi)
 
+    implementation project(ProfileModules.profileUi)
+
     implementation Libraries.kotlin
 
     implementation Libraries.appCompat
@@ -79,10 +81,6 @@ dependencies {
 
     implementation Libraries.navigationFragment
     implementation Libraries.navigationUi
-
-    //Navigation
-    implementation "androidx.navigation:navigation-runtime-ktx:2.2.0-alpha01"
-    implementation "androidx.navigation:navigation-ui-ktx:2.2.0-alpha01"
 
     implementation Libraries.timber
 

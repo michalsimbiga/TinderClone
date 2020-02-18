@@ -25,7 +25,6 @@ object SwipeSuggestionsModules : ModuleLoader() {
     }
 }
 
-
 private val repositoryModule = module {
     single<SuggestionsRepository> { SuggestionsRepositoryImpl(suggestionsRemoteDataSource = get()) }
 }

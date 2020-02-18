@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/common_domain" />
             <option value="$PROJECT_DIR$/common_remote" />
             <option value="$PROJECT_DIR$/common_ui" />
+            <option value="$PROJECT_DIR$/profile_ui" />
             <option value="$PROJECT_DIR$/swipesuggestions_data" />
             <option value="$PROJECT_DIR$/swipesuggestions_domain" />
             <option value="$PROJECT_DIR$/swipesuggestions_ui" />
