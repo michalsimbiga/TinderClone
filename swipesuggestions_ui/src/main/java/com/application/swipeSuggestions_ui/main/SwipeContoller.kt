@@ -1,6 +1,7 @@
 package com.application.swipeSuggestions_ui.main
 
 import com.airbnb.epoxy.EpoxyController
+import com.airbnb.epoxy.EpoxyModel
 import com.application.swipeSuggestions_ui.models.SwipeableCardViewModel_
 import com.example.swipesuggestions_domain.entity.Suggestion
 import java.util.*
@@ -25,6 +26,6 @@ class SwipeContoler : EpoxyController() {
     }
 
     override fun buildModels() {
-        add(ModelGroup(swipeCardModels))
+        add(ModelGroup(swipeCardModels as List<EpoxyModel<SwipeableCardViewModel_>>))
     }
 }
